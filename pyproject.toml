@@ -37,6 +37,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+resource-benchmark = ["psutil>=7"]
 mcp = [
     "mcp>=2.0,<3.0",
 ]
