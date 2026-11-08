@@ -1,0 +1,69 @@
+{
+  "model": "minishlab/potion-code-16M-v2",
+  "dimension": 256,
+  "token_density": {
+    "repeated-python": {
+      "bytes": 4096,
+      "tokens": 841,
+      "tokens_per_KiB": 210.25,
+      "split_windows_at_512_min": 2
+    },
+    "minified-js": {
+      "bytes": 4096,
+      "tokens": 2526,
+      "tokens_per_KiB": 631.5,
+      "split_windows_at_512_min": 5
+    },
+    "hex": {
+      "bytes": 4096,
+      "tokens": 1,
+      "tokens_per_KiB": 0.25,
+      "split_windows_at_512_min": 1
+    },
+    "json": {
+      "bytes": 4096,
+      "tokens": 2016,
+      "tokens_per_KiB": 504.0,
+      "split_windows_at_512_min": 4
+    },
+    "repo-python": {
+      "bytes": 4096,
+      "tokens": 1004,
+      "tokens_per_KiB": 251.0,
+      "split_windows_at_512_min": 2
+    }
+  },
+  "inventory_scope": "tracked supported extensions; upper bound before content/binary filters; no paths",
+  "repositories": [
+    {
+      "supported_extension_tracked_files": 190,
+      "above_1MB": 0,
+      "above_100MB": 0,
+      "above_1GB": 0
+    },
+    {
+      "supported_extension_tracked_files": 347,
+      "above_1MB": 0,
+      "above_100MB": 0,
+      "above_1GB": 0
+    },
+    {
+      "supported_extension_tracked_files": 1396,
+      "above_1MB": 0,
+      "above_100MB": 0,
+      "above_1GB": 0
+    },
+    {
+      "supported_extension_tracked_files": 52,
+      "above_1MB": 0,
+      "above_100MB": 0,
+      "above_1GB": 0
+    },
+    {
+      "supported_extension_tracked_files": 39,
+      "above_1MB": 0,
+      "above_100MB": 0,
+      "above_1GB": 0
+    }
+  ]
+}
