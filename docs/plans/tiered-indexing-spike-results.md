@@ -110,6 +110,11 @@ encode each verified bounded input with max_length=None.
 Timings have n=1 per condition and are indicative, not statistical comparisons.
 Raw data records the script hash and dirty git description.
 
+Ratios above count potential vectors before the ADR’s unknown-token filter;
+the all-unknown hex sample would actually persist a reference and **zero vectors**.
+The raw baseline field identifies the original behavior commit, not the spike
+script revision; script_sha256 binds the exact measured script.
+
 These are small-sample sizing estimates, not full-corpus row counts. Hex produces
 one unknown token: no tokenizer splitting strategy recovers semantics of arbitrary
 hex identifiers with this model. References add 52 bytes per row, plus an 8-byte vector-to-reference map entry
@@ -143,8 +148,9 @@ inputs still need an explicit coverage/reference policy; no misleading vectors.
 - The 200-file fixture exercises two normal workers. Real embeddings tested through
   128 MB, scanner through 1 GB; no feature Windows, incremental refresh, cancellation,
   concurrent query, eviction, corrupt-cache or semantic recall evidence is claimed.
-- Linux-specific tooling is confined to this opt-in benchmark. The timeout kills
-  its process group; cancellation also cleans up the live worker group.
+- Linux-specific tooling is confined to this opt-in benchmark. Timeout or SIGINT
+  kills the live worker group through finally; SIGTERM and orphaned grandchildren
+  after normal worker exit are not covered by that cleanup guarantee.
 
 Results support a separate block backend and small embedding batches. Concrete
 choices and release gates: [ADR](tiered-indexing-adr.md).

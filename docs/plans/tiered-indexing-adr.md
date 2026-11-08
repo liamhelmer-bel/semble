@@ -48,7 +48,7 @@ quantization and the aggregate quota, rather than misdescribing that advice as
 silent demotion. Approval of this ADR explicitly includes **no total repository
 quota**. This does not mean writing until the disk fills: before embedding, do a
 bounded tokenizer-only sizing pass using the exact proposed window splitter and
-fingerprint validation. Project vector rows × (4×dimension + 52 + 8), manifests,
+fingerprint validation. Project reference rows × 52 + vector rows × (4×dimension + 8), manifests,
 normal-index staging allowance, old generations retained and duplicate content
 scopes. Refuse staging if projected additional allocation exceeds free space
 minus max(4 GiB, 10% of filesystem capacity). Report disabled coverage with a disk
@@ -246,7 +246,9 @@ work. Use flock(2) shared/exclusive advisory locks on POSIX and LockFileEx on Wi
 through a reviewed adapter with in-process ownership/refcounts. Do not use
 classic POSIX fcntl/lockf record locks whose release-on-any-close semantics break
 concurrent query pins; do not infer safety from PID/timeouts or reclaim a
-live lock. Crashes release OS locks. Atomic pointer publication is not a lock. Never replace
+live lock. Refuse cache publication on network filesystems unless the adapter
+can establish equivalent lock semantics; test supported NFS behavior explicitly.
+Crashes release OS locks. Atomic pointer publication is not a lock. Never replace
 a mapped data file in place. Each reader acquires a shared OS generation lock
 and opens every component when pinning a generation (never lazily after the pin).
 Use a short cache-key catalog lock around CURRENT lookup and pin acquisition;
